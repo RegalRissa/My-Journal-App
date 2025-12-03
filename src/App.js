@@ -128,6 +128,12 @@ export default function App() {
   // --- RENDER ---
   return (
     <div className="min-h-screen bg-black text-white font-sans selection:bg-gray-800 pb-24">
+      {/* GLOBAL STYLES FOR DATE PICKER */}
+      <style>{`
+        ::-webkit-calendar-picker-indicator { filter: invert(1); opacity: 0.6; cursor: pointer; }
+        input[type="date"] { color-scheme: dark; }
+      `}</style>
+
       <div className="max-w-3xl mx-auto px-6 py-8">
         
         {/* VIEW: ENTRY FORM */}
@@ -141,11 +147,9 @@ export default function App() {
             <div className="space-y-6 mb-8">
               <div>
                 <label className="block text-xs uppercase tracking-widest text-gray-500 mb-2">Select Date</label>
-                {/* Fixed Date Input: color-scheme: dark ensures the calendar is visible */}
                 <input 
                   type="date" 
                   value={formData.date}
-                  style={{ colorScheme: 'dark' }} 
                   className="w-full bg-transparent border-b border-gray-700 text-white p-2 focus:outline-none focus:border-white transition-colors cursor-pointer"
                   onChange={(e) => setFormData({...formData, date: e.target.value})}
                 />
@@ -314,7 +318,7 @@ export default function App() {
           </div>
         )}
         
-        {/* BOTTOM NAVIGATION */}
+        {/* BOTTOM NAVIGATION WITH VERSION INDICATOR */}
         <div className="fixed bottom-6 left-1/2 transform -translate-x-1/2 bg-gray-900/90 backdrop-blur-md border border-gray-800 rounded-full px-8 py-4 flex gap-12 shadow-2xl z-50">
           <button 
             onClick={() => setView('entry')}
@@ -331,6 +335,11 @@ export default function App() {
             <BarChart2 size={24} />
             <span className="text-[10px] uppercase tracking-wider font-bold">Insights</span>
           </button>
+        </div>
+
+        {/* VERSION CHECKER: If you don't see this text, you are on the old version! */}
+        <div className="fixed bottom-1 right-2 text-gray-700 text-[10px]">
+          v2.0 Fixed
         </div>
       </div>
     </div>
